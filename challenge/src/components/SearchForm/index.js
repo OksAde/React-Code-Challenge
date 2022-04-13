@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-export function SearchForm  ()  {
+export default function SearchForm  ()  {
 
 
     const initialUsername = useSelector(state => state.username);
