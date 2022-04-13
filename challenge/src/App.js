@@ -1,13 +1,12 @@
 import React from 'react'
-// import { Form, Result } from './components';
+import { UserSearch, SearchForm, Results} from './components'
 
 
 function App() {
   return (
     <>
-      {/* <Form />
-      <Result /> */}
-      Helloworld
+      <UserSearch />
+      <Result />
     </>
   );
 }

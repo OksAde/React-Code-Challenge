@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { getRepos } from '../../actions';
 
-export const UserSearch = () => {
+export function Result  ()  {
     const [ userName, setUserName ] = useState("");
     const [ nameInput, setNameInput ] = useState("");
     const [ userData, setUserData] = useState([]);
