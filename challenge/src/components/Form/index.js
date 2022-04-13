@@ -36,4 +36,3 @@ export default function Form() {
   )
 }
 
-export default Form

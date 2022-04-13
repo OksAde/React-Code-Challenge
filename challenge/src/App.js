@@ -1,13 +1,14 @@
-import react from 'react'
+import React from 'react'
+// import { Form, Result } from './components';
 
-import react from 'react';
-import { Form } from './form';
 
 function App() {
   return (
-    <div className="App">
-      Search
-    </div>
+    <>
+      {/* <Form />
+      <Result /> */}
+      Helloworld
+    </>
   );
 }
 
