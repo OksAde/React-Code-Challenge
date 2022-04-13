@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Results({data}) {
+export default function Results({data}) {
   return (
     <div className='item' role='listItem'>
         <h3><a href={data.html_url} target="_blank">{data.name}</a></h3>

@@ -1,14 +1,13 @@
-import React from 'react'
-import { UserSearch, SearchForm, Results} from './components'
-
+import React from 'react';
+import { UserSearch, SearchForm} from './components'
 
 function App() {
   return (
     <>
       <UserSearch />
-      <Result />
+      <SearchForm />
     </>
   );
-}
+};
 
 export default App;
