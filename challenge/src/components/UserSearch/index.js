@@ -1,48 +1,37 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Results } from "..";
 import { getRepos } from '../../actions';
 
-export function Result  ()  {
-    const [ userName, setUserName ] = useState("");
-    const [ nameInput, setNameInput ] = useState("");
-    const [ userData, setUserData] = useState([]);
+export default function UserSearch() {
+    const username = useSelector(state => state.username);
+    const results = useSelector(state => state.results);
+    const loading = useSelector(state => state.loading);
+    const error = useSelector(state => state.error);
+    const dispatch = useDispatch();
 
-    const handleInput = e => setNameInput(e.target.value);
+    const renderResults = results.map(result => (
+        <Results key={result.id} data={result} />
+    ));
 
-    const handleFormSubmit = e => {
-        e.preventDefault();
-        setUserName(nameInput);
-        fetchUser(nameInput);
-        setNameInput("");
-    }
-
-    const fetchUser = async (nameInput) => {
-        try {
-            let { data } = await axios.get(`https://api.github.com/users/${nameInput}/repos`)
-            console.log(data[0].name)
-            setUserData(data)
-        } catch (err) {
-            console.log("User not found")
-        }
-    };
+    useEffect(() => {
+        username && dispatch(getRepos(username));
+    }, [username]);
 
     return (
-        <div>
-          <form onSubmit={handleFormSubmit}>
-              <label htmlFor='username'>Username</label>
-              <input type='text' id = 'username' placeholder = 'Add GitHub username' value = {nameInput} onChange = {handleInput} />
-              <input type = "submit" />
-          </form>
-
-          <div className = 'userData'>
-              <ul> {
-                  userData.map( e => (
-                      <li key = {e.id} >
-                      <button className="gitButton" > Repository Name: {e.name} </button>
-                    </li>
-                  ))}
-                </ul>
-          </div>
-        </div>
-    )
+        <>
+        {username && <h2>{username}'s Repositories ({results.length})</h2>}
+        <section className="repo-section">
+            {
+                loading ?
+                <h1>Loading ...</h1> :
+                (
+                    error ?
+                    <h1 role="alert">Error: {error}</h1> :
+                    renderResults
+                )
+            }
+        </section>
+        </>
+    );
 }
